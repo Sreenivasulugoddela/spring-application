@@ -1,54 +1,24 @@
-##version: '3.8'  # Specify the Docker Compose file format version
-##
-##services:
-##  mysql:
-##    image: mysql:9.0.1  # Use MySQL version 9.0.1
-##    container_name: my_mysql_container  # Name of the container
-##    environment:
-##      MYSQL_ROOT_PASSWORD: root_password  # Set the root password
-##      MYSQL_DATABASE: mydatabase  # Create a database named 'mydatabase'
-##      MYSQL_USER: user  # Create a user named 'user'
-##      MYSQL_PASSWORD: my-secret-pw  # Set the password for the 'user'
-##    ports:
-##      - "3306:3306"  # Map host port 3306 to container port 3306
-##    volumes:
-##      - mysql_data:/var/lib/mysql  # Persist MySQL data
-##
-##volumes:
-##  docker_pg-data:  # Define a named volume for MySQL data persistence
-#
-#
-#services:
-#  postgres:
-#    image: postgres:12
-#    container_name: custom-postgres
-#    environment:
-#      POSTGRES_USER: dockerUser
-#      POSTGRES_PASSWORD: docker@123
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - /home/ubuntu/work/pg-data:/var/lib/postgresql/data
-#    networks:
-#      - docker_springboot-network
-#    restart: unless-stopped
-#  app:
-#    image: training-application:latest
-#    container_name: training-application
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/
-#      SPRING_DATASOURCE_USERNAME: dockerUser
-#      SPRING_DATASOURCE_PASSWORD: docker@123
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - docker_springboot-network
-#
-#networks:
-#  docker_springboot-network:
-#    driver: bridge
-#
-#volumes:
-#  docker_pg-data:
+version: '3'
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: roma
+      POSTGRES_PASSWORD: roma@123
+    ports:
+      - "5438:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: roma
+      SPRING_DATASOURCE_PASSWORD: roma@123
