@@ -12,9 +12,9 @@ spring:
 ---
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5438/postgres
-    username: roma
-    password: roma@123
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
