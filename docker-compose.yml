@@ -1,24 +1,24 @@
 version: '3'
 services:
   postgres:
-    image: postgres:12
+    image: postgres:13
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: roma
-      POSTGRES_PASSWORD: roma@123
+      POSTGRES_DB: oms
+      POSTGRES_USER: oms
+      POSTGRES_PASSWORD: oms@123
     ports:
-      - "5438:5432"
+      - "5443:5432"
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8089:8089"
+      - "8090:8090"
     depends_on:
       - postgres
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
-      SPRING_DATASOURCE_USERNAME: roma
-      SPRING_DATASOURCE_PASSWORD: roma@123
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres?search_path=testdb
+      SPRING_DATASOURCE_USERNAME: oms
+      SPRING_DATASOURCE_PASSWORD: oms@123

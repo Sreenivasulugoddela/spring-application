@@ -1,20 +1,18 @@
 server:
-  port: ${PORT:${SERVER_PORT:8080}}
-  address: 0.0.0.0
+  port: 8090
+
 spring:
   application:
     name: training-application
-  devtools:
-    add-properties: false
-  main:
-    allow-bean-definition-overriding: true
-    banner-mode: "off"
+
 ---
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://database-1.cnya44sew6fx.us-east-1.rds.amazonaws.com:5432/oms
     username: postgres
-    password: postgres
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,6 +20,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
   profiles:
     active: dev
-
