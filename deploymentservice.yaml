@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: spring-boot-k8s
-          image: sreenivasulu62/dockerrepo:latest # Image that will be used to containers in the cluster
+          image: sreenivasulu62/dockerrepo:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8090 # The port that the container is running on in the cluster
+            - containerPort: 8090
 ---
 
 apiVersion: v1 # Kubernetes API version
@@ -29,6 +29,6 @@ spec:
     app: spring-boot-k8s
   ports:
     - protocol: "TCP"
-      port: 8080 # The port that the service is running on in the cluster
+      port: 8090 # The port that the service is running on in the cluster
       targetPort: 8090 # The port exposed by the service
-  type: NodePort # type of the service.
+  type: NodePort
