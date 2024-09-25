@@ -6,6 +6,6 @@ RUN mvn clean install -DskipTests
 
 COPY target/training-application.jar /app/app.jar
 
-EXPOSE 8080
+EXPOSE 5004
 
 CMD ["java",  "-jar", "/app/app.jar", "--spring.profiles.active=dev"]
